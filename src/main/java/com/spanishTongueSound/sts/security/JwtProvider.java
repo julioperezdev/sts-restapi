@@ -8,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.Date;
 import static io.jsonwebtoken.Jwts.parser;
 import static java.sql.Timestamp.from;
 
+@Service
 public class JwtProvider {
 
     @Value("${jwt.secretkey.jwtSecret}")

@@ -12,9 +12,11 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+//    String queryCreateUser =
+//            "INSERT INTO Users (username, password, email, created, enable) " +
+//                    "VALUES( :username, :password, :email, :created, :enable) ;";
     String queryCreateUser =
-            "INSERT INTO Users (username, password, email, created, enable) " +
-                    "VALUES( :username, :password, :email, :created, :enable) RETURNING *;";
+        "EXEC createUser @Username = ':username', @Password = ':password', @Email = ':email', @Created = ':created', @Enable = :enable ";
     @Query(value = queryCreateUser, nativeQuery = true)
     User createUser(
             @Param("username") String username,
