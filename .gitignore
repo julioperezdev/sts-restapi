@@ -1,4 +1,5 @@
 src/main/resources/application.properties
+docker-compose.yml
 
 HELP.md
 target/
