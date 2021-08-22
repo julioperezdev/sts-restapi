@@ -7,17 +7,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
 
-    String querySaveRefreshToken = "INSERT INTO RefreshToken (token, createdDate) " +
-            "VALUES( :token , :createdDate  ) RETURNING * ;";
+    String querySaveRefreshToken = "EXEC saveRefreshToken @Token = :token , @CreateDate = :createdate ";
+//            "INSERT INTO RefreshToken (token, createdDate) " +
+//            "VALUES( :token , :createdDate  ) RETURNING * ;";
     @Query(value = querySaveRefreshToken, nativeQuery = true)
     RefreshToken saveRefreshToken(
             @Param("token") String token,
-            @Param("createdDate") Instant createdDate
+            @Param("createdate") Date createDate
     );
 
     String queryGetRefreshTokenByToken = "SELECT * FROM RefreshToken WHERE token = :token ;";

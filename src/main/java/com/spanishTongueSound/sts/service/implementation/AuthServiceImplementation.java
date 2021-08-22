@@ -13,6 +13,8 @@ import com.spanishTongueSound.sts.respository.UserRepository;
 import com.spanishTongueSound.sts.respository.VerificationTokenRepository;
 import com.spanishTongueSound.sts.security.JwtProvider;
 import com.spanishTongueSound.sts.service.AuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,12 +25,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class AuthServiceImplementation implements AuthService {
+
+    Logger logger = LoggerFactory.getLogger(AuthServiceImplementation.class);
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -62,7 +69,7 @@ public class AuthServiceImplementation implements AuthService {
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setCreated(Instant.now());
+        user.setCreated(Date.from(Instant.now()));
         user.setEnable(false);
         User userCreated = userRepository.createUser(
                 user.getUsername(),
@@ -71,6 +78,11 @@ public class AuthServiceImplementation implements AuthService {
                 user.getCreated(),
                 user.isEnable());
         System.out.println(userCreated);
+        System.out.println(userCreated.getEmail());
+        System.out.println(String.valueOf(userCreated.getCreated()));
+        System.out.println(userCreated.getUsername());
+        System.out.println(userCreated.getPassword());
+        System.out.println(String.valueOf(userCreated.isEnable()));
 //        generateVerificationToken(user);
         String token = generateVerificationToken(userCreated);
         mailServiceImplementation.sendMail(new NotificationEmail("Please Activate your Account",
@@ -93,7 +105,8 @@ public class AuthServiceImplementation implements AuthService {
         System.out.println(token);
         verificationToken.setToken(token);
         verificationToken.setUserId(user.getUserId());
-        System.out.println(verificationToken);
+        System.out.println(verificationToken.getToken());
+        System.out.println(verificationToken.getUserId());
         //verificationTokenRepository.createToken(verificationToken.getToken()) ;
         verificationTokenRepository.createToken(verificationToken.getToken(), verificationToken.getUserId());
         //verificationTokenRepository.save(verificationToken);

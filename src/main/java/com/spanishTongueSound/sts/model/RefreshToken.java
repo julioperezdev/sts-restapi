@@ -9,16 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "refreshtoken")
+@Table(name = "REFRESH_TOKEN")
 public class RefreshToken {
     @Id
     private Long id;
     private String token;
-    @Column(name = "createddate")
-    private Instant createdDate;
+
+    @Column(name = "createdate")
+    private Date createDate;
 }

@@ -26,7 +26,8 @@ class MailServiceImplementation {
     void sendMail(NotificationEmail notificationEmail) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("ceo@protobot.dev");
+            messageHelper.setFrom("gerencia@naturismoysaludintegral.com");
+            //messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
             messageHelper.setText(notificationEmail.getBody());

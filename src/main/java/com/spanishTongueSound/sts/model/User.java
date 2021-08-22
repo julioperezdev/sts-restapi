@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -20,13 +22,13 @@ public class User {
 
     private String email;
 
-    private Instant created;
+    private Date created;
 
     private boolean enable;
 
     public User(){}
 
-    public User(Long userId, String username, String password, String email, Instant created, boolean enable) {
+    public User(Long userId, String username, String password, String email, Date created, boolean enable) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -35,7 +37,7 @@ public class User {
         this.enable = enable;
     }
 
-    public User(String username, String password, String email, Instant created, boolean enable) {
+    public User(String username, String password, String email, Date created, boolean enable) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -75,11 +77,11 @@ public class User {
         this.email = email;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

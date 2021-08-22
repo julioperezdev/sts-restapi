@@ -12,10 +12,12 @@ import java.util.Optional;
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
     String queryCreateToken =
-            "INSERT INTO token (token, userid) " +
-                    "VALUES( :token, :userid) RETURNING NULL;";
+            "EXEC createToken @Token = :token , @Id = :userid ";
+//            "INSERT INTO TOKEN (token, userid) " +
+//                    "VALUES( :token, :userid) ;";
+
     @Query(value = queryCreateToken, nativeQuery = true)
-    void createToken(
+    Optional<VerificationToken> createToken(
             @Param("token") String token,
             @Param("userid") Long userid);
 
