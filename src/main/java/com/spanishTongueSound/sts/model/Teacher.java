@@ -12,12 +12,12 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "TEACHER")
-public class Teacher {
+public class Teacher{
 
     @Id
     private Long id;
 
-    private String email;
+    private Long idUser;
 
     private String firstname;
 
@@ -34,9 +34,10 @@ public class Teacher {
 
     public Teacher(){}
 
-    public Teacher(Long id, String email, String firstname, String surname, int age, int quantityStudents, String imageurl, String publicid) {
+    public Teacher(Long id, Long idUser, String firstname, String surname, int age, int quantityStudents, String imageurl, String publicid) {
+        super();
         this.id = id;
-        this.email = email;
+        this.idUser = idUser;
         this.firstname = firstname;
         this.surname = surname;
         this.age = age;
@@ -45,8 +46,9 @@ public class Teacher {
         this.publicid = publicid;
     }
 
-    public Teacher(String email, String firstname, String surname, int age, int quantityStudents, String imageurl, String publicid) {
-        this.email = email;
+    public Teacher(Long idUser, String firstname, String surname, int age, int quantityStudents, String imageurl, String publicid) {
+        super();
+        this.idUser = idUser;
         this.firstname = firstname;
         this.surname = surname;
         this.age = age;

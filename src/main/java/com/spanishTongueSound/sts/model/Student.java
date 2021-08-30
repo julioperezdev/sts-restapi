@@ -3,6 +3,7 @@ package com.spanishTongueSound.sts.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ public class Student {
     @Id
     private Long id;
 
-    private String email;
+    private Long idUser;
 
     private String firstname;
 
@@ -28,6 +29,7 @@ public class Student {
 
     private Long idPlan;
 
+    @Column(name = "statusPayment")
     private boolean statusPayment;
 
     private String imageurl;
@@ -36,9 +38,9 @@ public class Student {
 
     public Student(){}
 
-    public Student(Long id, String email, String firstname, String surname, int age, int currentLevel, Long idPlan, boolean statusPayment, String imageurl, String publicid) {
+    public Student(Long id, Long idUser, String firstname, String surname, int age, int currentLevel, Long idPlan, boolean statusPayment, String imageurl, String publicid) {
         this.id = id;
-        this.email = email;
+        this.idUser = idUser;
         this.firstname = firstname;
         this.surname = surname;
         this.age = age;
@@ -49,8 +51,8 @@ public class Student {
         this.publicid = publicid;
     }
 
-    public Student(String email, String firstname, String surname, int age, int currentLevel, Long idPlan, boolean statusPayment, String imageurl, String publicid) {
-        this.email = email;
+    public Student(Long idUser, String firstname, String surname, int age, int currentLevel, Long idPlan, boolean statusPayment, String imageurl, String publicid) {
+        this.idUser = idUser;
         this.firstname = firstname;
         this.surname = surname;
         this.age = age;
